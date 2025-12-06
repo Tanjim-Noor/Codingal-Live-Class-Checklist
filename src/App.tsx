@@ -1,19 +1,20 @@
 import { useState } from 'react';
 import { CheckSquare, Book, FileText, Clock, Award, AlertCircle } from 'lucide-react';
 import type { Tab } from './types';
-import { ChecklistTab, RubricTab, ScriptTab, PreClassTab, PostClassTab, RisksTab } from './components/tabs';
+import { ChecklistTab, RubricTab, ScriptTab, PreClassTab, PostClassTab, RisksTab, GuidedScriptTab } from './components/tabs';
 
 const tabs: Tab[] = [
+  { id: 'guided', name: 'Guided Script', icon: FileText },
   { id: 'checklist', name: 'Live Checklist', icon: CheckSquare },
   { id: 'rubric', name: 'Rubric Breakdown', icon: Book },
-  { id: 'script', name: 'Teaching Script', icon: FileText },
+  { id: 'script', name: 'Old Script', icon: FileText },
   { id: 'pre', name: 'Pre-Class', icon: Clock },
   { id: 'post', name: 'Post-Class', icon: Award },
   { id: 'risks', name: 'Avoid Mistakes', icon: AlertCircle }
 ];
 
 function App() {
-  const [activeTab, setActiveTab] = useState('checklist');
+  const [activeTab, setActiveTab] = useState('guided');
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
 
   const toggleCheck = (id: string) => {
@@ -53,6 +54,9 @@ function App() {
           </div>
 
           <div className="p-6 max-h-screen overflow-y-auto">
+            {activeTab === 'guided' && (
+              <GuidedScriptTab checkedItems={checkedItems} onToggle={toggleCheck} />
+            )}
             {activeTab === 'checklist' && (
               <ChecklistTab checkedItems={checkedItems} onToggle={toggleCheck} />
             )}

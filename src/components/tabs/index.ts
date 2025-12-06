@@ -4,3 +4,4 @@ export { ScriptTab } from './ScriptTab';
 export { PreClassTab } from './PreClassTab';
 export { PostClassTab } from './PostClassTab';
 export { RisksTab } from './RisksTab';
+export { GuidedScriptTab } from './GuidedScriptTab';
